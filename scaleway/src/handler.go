@@ -1,23 +1,15 @@
 package handler
 
 import (
-	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
 )
 
 func Handle(w http.ResponseWriter, r *http.Request) {
-	response := map[string]interface{}{
-		"message": "We're all good",
-		"healthy": true,
-		"number":  4,
-	}
+	_, err := io.WriteString(w, "Hello from a Go function!")
 
-	responseB, err := json.Marshal(response)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
+		http.Error(w, fmt.Sprint(err), http.StatusInternalServerError)
 	}
-
-	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write(responseB)
 }
