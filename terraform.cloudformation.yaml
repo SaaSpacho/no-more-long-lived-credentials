@@ -1,0 +1,45 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Everything needed to bootstrap a Terraform environment"
+Resources:
+  StateBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Project
+          Value: no-more-long-lived-credentials
+  CodeBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Project
+          Value: GlobalInfrastructure
+  ManageTerraformPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Sub "${AWS::StackName}-manage-state"
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+              - s3:DeleteObject
+            Resource:
+              - !Sub "arn:${AWS::Partition}:s3:::${StateBucket}/*"
+              - !Sub "arn:${AWS::Partition}:s3:::${CodeBucket}/*"
+          - Effect: Allow
+            Action:
+              - s3:ListBucket
+            Resource:
+              - !Sub "arn:${AWS::Partition}:s3:::${StateBucket}"
+              - !Sub "arn:${AWS::Partition}:s3:::${CodeBucket}"
+Outputs:
+  StateBucketName:
+    Description: Name of the S3 bucket used to store Terraform state
+    Value: !Ref StateBucket
