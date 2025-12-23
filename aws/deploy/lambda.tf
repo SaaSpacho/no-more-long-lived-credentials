@@ -35,6 +35,12 @@ data "aws_iam_policy_document" "execution" {
     resources = [
       "*"
     ]
+    # TODO
+    # condition {
+    #   test     = "StringEquals"
+    #   values = ["no-more-long-lived-credentials-lambda"]
+    #   variable = "sts:IdentityTokenAudience"
+    # }
   }
 }
 
