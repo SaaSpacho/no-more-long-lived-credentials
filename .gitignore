@@ -1,3 +1,9 @@
 .idea/
 
 .terraform/
+
+.venv/
+
+code/
+
+bootstrap
