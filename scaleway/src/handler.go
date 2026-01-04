@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"path"
 
 	"github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
@@ -16,7 +17,7 @@ var keyFunc keyfunc.Keyfunc
 func init() {
 	var jwksEndpoints []string
 	for issuer := range allowedIssuers {
-		jwksEndpoints = append(jwksEndpoints, fmt.Sprintf("%s/.well-known/jwks.json", issuer))
+		jwksEndpoints = append(jwksEndpoints, path.Join(issuer, ".well-known/jwks.json"))
 	}
 
 	f, err := keyfunc.NewDefault(jwksEndpoints)
