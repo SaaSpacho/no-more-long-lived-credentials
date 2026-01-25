@@ -76,5 +76,5 @@ resource "aws_lambda_function" "this" {
   handler = "bootstrap"
   runtime = "provided.al2023"
 
-  architectures = ["arm64"]
+  architectures = ["x86_64"]
 }

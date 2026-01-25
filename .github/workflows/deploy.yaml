@@ -15,6 +15,9 @@ jobs:
       run:
         working-directory: ./scaleway/deploy
     steps:
+      - name: Set up OpenTofu
+        uses: opentofu/setup-opentofu@v1
+
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v5
         with:
@@ -23,9 +26,6 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v6
-
-      - name: Set up OpenTofu
-        uses: opentofu/setup-opentofu@v1
 
       - run: tofu init
       - run: tofu apply -auto-approve
@@ -39,8 +39,8 @@ jobs:
       run:
         working-directory: ./aws/deploy
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - name: Set up Go
+        uses: actions/setup-go@v6
 
       - name: Set up OpenTofu
         uses: opentofu/setup-opentofu@v1
@@ -50,6 +50,12 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: eu-central-1
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - run: go build -o bootstrap ./main.go
+        working-directory: ./aws/src/
 
       - run: tofu init
       - run: tofu apply -auto-approve
