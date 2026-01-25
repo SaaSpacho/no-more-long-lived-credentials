@@ -16,6 +16,7 @@ resource "scaleway_function" "this" {
   timeout      = 10
 
   min_scale = 0
+  max_scale = 2
 
   handler = "Handle"
   privacy = "public"

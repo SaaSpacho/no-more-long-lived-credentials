@@ -49,11 +49,11 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              Federated: token.actions.githubusercontent.com
+              Federated: arn:aws:iam::979650845757:oidc-provider/token.actions.githubusercontent.com
             Action: sts:AssumeRoleWithWebIdentity
             Condition:
               StringLike:
-                token.actions.githubusercontent.com:sub: repo:SaaSpacho/no-more-long-lived-credentials:*
+                token.actions.githubusercontent.com:sub: repo:SaaSpacho/no-more-long-lived-credentials:ref:refs/*
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
 Outputs:
