@@ -28,3 +28,4 @@ jobs:
         uses: opentofu/setup-opentofu@v1
 
       - run: tofu init
+      - run: tofu plan
