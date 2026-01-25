@@ -1,5 +1,5 @@
 ---
-name: Deploy to Scaleway
+name: Deploy to Scaleway and AWS
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   id-token: write
 
 jobs:
-  deploy:
+  scaleway:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,3 +32,24 @@ jobs:
         env:
           SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
           SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+
+  aws:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./aws/deploy
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up OpenTofu
+        uses: opentofu/setup-opentofu@v1
+
+      - name: Login to AWS
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: eu-central-1
+
+      - run: tofu init
+      - run: tofu apply -auto-approve
