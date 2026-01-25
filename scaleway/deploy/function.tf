@@ -25,3 +25,7 @@ resource "scaleway_function" "this" {
   zip_hash = archive_file.code.output_base64sha256
   deploy   = true
 }
+
+output "function_endpoint" {
+  value = scaleway_function.this.domain_name
+}

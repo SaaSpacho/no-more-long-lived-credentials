@@ -28,7 +28,7 @@ jobs:
         uses: opentofu/setup-opentofu@v1
 
       - run: tofu init
-      - run: tofu plan
+      - run: tofu apply -auto-approve
         env:
           SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
           SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
