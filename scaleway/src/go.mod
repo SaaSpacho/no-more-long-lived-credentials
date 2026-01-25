@@ -1,6 +1,6 @@
 module github.com/SaaSpacho/no-more-long-lived-credentials/scaleway
 
-go 1.24.0
+go 1.24
 
 require (
 	github.com/MicahParks/keyfunc/v3 v3.7.0
