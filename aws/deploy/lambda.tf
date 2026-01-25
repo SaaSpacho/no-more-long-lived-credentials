@@ -76,5 +76,14 @@ resource "aws_lambda_function" "this" {
   handler = "bootstrap"
   runtime = "provided.al2023"
 
-  architectures = ["arm64"]
+  architectures = ["x86_64"]
+}
+
+resource "aws_lambda_function_url" "this" {
+  function_name      = aws_lambda_function.this.function_name
+  authorization_type = "NONE"
+}
+
+output "lambda_function_url" {
+  value = aws_lambda_function_url.this.function_url
 }

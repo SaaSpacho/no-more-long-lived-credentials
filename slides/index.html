@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>No more long lived credentials</title>
+    <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/black.css" />
+
+    <link href="/assets/css/all.min.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        .reveal {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 100;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- LANDING -->
+            <section data-background-image="/assets/img/lock-and-keys.jpg" data-background-opacity="0.1">
+                <h2 class="r-fit-text">No more long lived credentials</h2>
+                <small><i class="fa-sharp fa-solid fa-cloud"></i><i> By Rob Kenis and Cel Pynenborg</i>
+                </small>
+            </section>
+
+            <!-- THE BEGINNING -->
+            <section data-background-image="/assets/img/the-beginning.jpg" data-background-opacity="0.1">
+                <h2>The beginning</h2>
+            </section>
+
+            <section data-background-image="/assets/img/the-beginning.jpg" data-background-opacity="0.1">
+                <pre><code data-trim data-noescape>
+curl -u 'username:password' https://api.example.com/data
+  </code></pre>
+            </section>
+
+            <!-- Add some slide on why basic auth is not a great idea -->
+
+            <!-- OIDC -->
+            <section data-background-image="/assets/img/field-of-flowers.jpg" data-background-opacity="0.1">
+                <h2>OpenID Connect</h2>
+            </section>
+
+            <!-- Add a slide on the benefits of OIDC and token based auth -->
+
+            <!-- AWS IAM OIDC Provider -->
+            <section data-background-image="/assets/img/connecting-lights.jpg" data-background-opacity="0.1">
+                <h2>AWS IAM OIDC Provider</h2>
+            </section>
+
+            <!-- Add a slide on GitHub to AWS authentication -->
+
+            <!-- OTHER WAY AROUND -->
+            <section data-background-image="/assets/img/other-way-around.jpg" data-background-opacity="0.1">
+                <h2>The other way around</h2>
+            </section>
+
+            <!-- Add a slide on GetWebIdentityToken -->
+
+            <!-- DEMO -->
+            <section data-background-image="/assets/img/laptop-and-juice.jpg" data-background-opacity="0.1">
+                <h2>Demo</h2>
+            </section>
+
+            <!-- THE END -->
+            <section data-background-image="/assets/img/sunset.jpg" data-background-opacity="0.1">
+                <h2>Thank you!</h2>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="/node_modules/reveal.js/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize();
+    </script>
+
+</body>
+
+</html>
