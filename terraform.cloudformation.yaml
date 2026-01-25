@@ -39,6 +39,23 @@ Resources:
             Resource:
               - !Sub "arn:${AWS::Partition}:s3:::${StateBucket}"
               - !Sub "arn:${AWS::Partition}:s3:::${CodeBucket}"
+  # Can be assumed by GitHub Actions
+  DeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${AWS::StackName}-deploy"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringLike:
+                token.actions.githubusercontent.com:sub: repo:SaaSpacho/no-more-long-lived-credentials:*
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
 Outputs:
   StateBucketName:
     Description: Name of the S3 bucket used to store Terraform state
