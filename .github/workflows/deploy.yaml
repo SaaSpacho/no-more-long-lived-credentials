@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Set up Go
         uses: actions/setup-go@v6
+        with:
+          go-version: '1.25'
 
       - name: Set up OpenTofu
         uses: opentofu/setup-opentofu@v1
