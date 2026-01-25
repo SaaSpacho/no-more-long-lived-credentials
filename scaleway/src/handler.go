@@ -8,6 +8,8 @@ import (
 
 	"github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
+
+	"github.com/rs/zerolog/log"
 )
 
 var allowedIssuers = map[string]bool{"https://a1759d82-9b03-4cd4-8483-8660e54a25b2.tokens.sts.global.api.aws": true}
@@ -55,11 +57,13 @@ func checkAuth(r *http.Request) error {
 	if err != nil {
 		return fmt.Errorf("failed to validate issuer: %w", err)
 	}
+	log.Info().Str("issuer", issuer).Msg("validated issuer")
 
 	parse, err := jwt.Parse(token, keyFunc.Keyfunc, jwt.WithIssuer(issuer))
 	if err != nil {
 		return fmt.Errorf("failed to parse token: %w", err)
 	}
+	log.Info().Msg("parsed token successfully")
 
 	if !parse.Valid {
 		return fmt.Errorf("invalid token")

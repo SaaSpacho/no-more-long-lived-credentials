@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+
+	"github.com/rs/zerolog/log"
 )
 
 type Handler struct {
@@ -17,7 +18,7 @@ type Handler struct {
 func main() {
 	h, err := NewHandler()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal().Err(err).Msg("failed to create handler")
 	}
 
 	lambda.Start(h.handle)
@@ -46,6 +47,6 @@ func (h Handler) handle(ctx context.Context) error {
 		return err
 	}
 
-	log.Println(*token.WebIdentityToken)
+	log.Info().Str("token", aws.ToString(token.WebIdentityToken)).Msg("obtained web identity token")
 	return nil
 }
