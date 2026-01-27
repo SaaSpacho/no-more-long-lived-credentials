@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"path"
 
 	"github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
@@ -19,7 +18,7 @@ var keyFunc keyfunc.Keyfunc
 func init() {
 	var jwksEndpoints []string
 	for issuer := range allowedIssuers {
-		jwksEndpoints = append(jwksEndpoints, path.Join(issuer, ".well-known/jwks.json"))
+		jwksEndpoints = append(jwksEndpoints, issuer+"/.well-known/jwks.json")
 	}
 
 	f, err := keyfunc.NewDefault(jwksEndpoints)
@@ -59,7 +58,7 @@ func checkAuth(r *http.Request) error {
 	}
 	log.Info().Str("issuer", issuer).Msg("validated issuer")
 
-	parse, err := jwt.Parse(token, keyFunc.Keyfunc)
+	parse, err := jwt.Parse(token, keyFunc.Keyfunc, jwt.WithIssuer(issuer))
 	if err != nil {
 		return fmt.Errorf("failed to parse token: %w", err)
 	}
