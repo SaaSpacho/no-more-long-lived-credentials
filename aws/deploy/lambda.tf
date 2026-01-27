@@ -73,6 +73,8 @@ resource "aws_lambda_function" "this" {
   filename         = archive_file.code.output_path
   source_code_hash = archive_file.code.output_base64sha256
 
+  timeout = 10
+
   handler = "bootstrap"
   runtime = "provided.al2023"
 
