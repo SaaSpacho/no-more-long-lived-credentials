@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/http"
@@ -22,7 +23,7 @@ func init() {
 		jwksEndpoints = append(jwksEndpoints, path.Join(issuer, ".well-known/jwks.json"))
 	}
 
-	f, err := keyfunc.NewDefault(jwksEndpoints)
+	f, err := keyfunc.NewDefaultCtx(context.Background(), jwksEndpoints)
 	if err != nil {
 		panic(fmt.Sprintf("failed to create JWKS keyfunc: %v", err))
 	}
