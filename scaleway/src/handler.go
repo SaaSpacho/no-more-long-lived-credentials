@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"context"
 	"fmt"
 	"io"
 	"net/http"
@@ -23,7 +22,7 @@ func init() {
 		jwksEndpoints = append(jwksEndpoints, path.Join(issuer, ".well-known/jwks.json"))
 	}
 
-	f, err := keyfunc.NewDefaultCtx(context.Background(), jwksEndpoints)
+	f, err := keyfunc.NewDefault(jwksEndpoints)
 	if err != nil {
 		panic(fmt.Sprintf("failed to create JWKS keyfunc: %v", err))
 	}
@@ -60,7 +59,7 @@ func checkAuth(r *http.Request) error {
 	}
 	log.Info().Str("issuer", issuer).Msg("validated issuer")
 
-	parse, err := jwt.Parse(token, keyFunc.Keyfunc, jwt.WithIssuer(issuer))
+	parse, err := jwt.Parse(token, keyFunc.Keyfunc)
 	if err != nil {
 		return fmt.Errorf("failed to parse token: %w", err)
 	}

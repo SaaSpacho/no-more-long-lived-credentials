@@ -33,20 +33,45 @@
 
             <!-- THE BEGINNING -->
             <section data-background-image="/assets/img/the-beginning.jpg" data-background-opacity="0.1">
-                <h2>The beginning</h2>
-            </section>
-
-            <section data-background-image="/assets/img/the-beginning.jpg" data-background-opacity="0.1">
-                <pre><code data-trim data-noescape>
-curl -u 'username:password' https://api.example.com/data
-  </code></pre>
+                <section>
+                    <h2>The beginning</h2>
+                </section>
+                <section>
+                    <p class="r-fit-text"><i>curl</i> <strong>-u 'username:password'</strong>
+                        <i>https://api.example.com/data</i>
+                    </p>
+                </section>
+                <section>
+                    <h3>Downsides of basic auth</h3>
+                    <ul>
+                        <li class="fragment">Credentials are sent with each request</li>
+                        <li class="fragment">Credentials are long lived</li>
+                        <li class="fragment">Hard to determine permissions</li>
+                    </ul>
+                </section>
             </section>
 
             <!-- Add some slide on why basic auth is not a great idea -->
 
             <!-- OIDC -->
             <section data-background-image="/assets/img/field-of-flowers.jpg" data-background-opacity="0.1">
-                <h2>OpenID Connect</h2>
+                <section>
+                    <h2>OpenID Connect (OIDC)</h2>
+                </section>
+                <section>
+                    <h3>How does it work</h3>
+                    <p class="r-fit-text"><span style="color: blue">eyJhbGciOiJIUzI1Ni</span>.<span
+                            style="color: green">eyJzdWIiOiIxMjM0NTY3O</span>.<span
+                            style="color: red">KMUFsIDTnFmyG37SmqJp-QV30</span></p>
+                    <p><span style="color: blue">header</span>.<span style="color: green">payload</span>.<span
+                            style="color: red">signature</span></p>
+                    <pre><code>{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "admin": true,
+  "iat": 1516239022
+}</code></pre>
+                </section>
             </section>
 
             <!-- Add a slide on the benefits of OIDC and token based auth -->
