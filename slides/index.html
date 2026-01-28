@@ -33,37 +33,81 @@
 
             <!-- THE BEGINNING -->
             <section data-background-image="/assets/img/the-beginning.jpg" data-background-opacity="0.1">
-                <h2>The beginning</h2>
+                <section>
+                    <h2>The beginning</h2>
+                </section>
+                <section>
+                    <p class="r-fit-text"><i>curl</i> <strong>-u 'username:password'</strong>
+                        <i>https://api.example.com/data</i>
+                    </p>
+                </section>
+                <section>
+                    <h3>Downsides of basic auth</h3>
+                    <ul>
+                        <li class="fragment">Credentials are sent with each request</li>
+                        <li class="fragment">Credentials are long lived</li>
+                        <li class="fragment">Hard to determine permissions</li>
+                    </ul>
+                </section>
             </section>
-
-            <section data-background-image="/assets/img/the-beginning.jpg" data-background-opacity="0.1">
-                <pre><code data-trim data-noescape>
-curl -u 'username:password' https://api.example.com/data
-  </code></pre>
-            </section>
-
-            <!-- Add some slide on why basic auth is not a great idea -->
 
             <!-- OIDC -->
             <section data-background-image="/assets/img/field-of-flowers.jpg" data-background-opacity="0.1">
-                <h2>OpenID Connect</h2>
+                <section>
+                    <h2>OpenID Connect (OIDC)</h2>
+                </section>
+                <section>
+                    <h3>How does it work</h3>
+                    <div style="display: flex">
+                        <div style="flex: 1; word-break: break-all; overflow-wrap: break-word;">
+                            <span style="color: blue">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span
+                                style="color: green">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0</span>.<span
+                                style="color: red">KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30</span>
+                        </div>
+                        <div style="margin-left: 1em;">
+                            <img height="300px" src="/assets/img/code-jwt.png" alt="JWT payload">
+                        </div>
+                    </div>
+                </section>
             </section>
-
-            <!-- Add a slide on the benefits of OIDC and token based auth -->
 
             <!-- AWS IAM OIDC Provider -->
             <section data-background-image="/assets/img/connecting-lights.jpg" data-background-opacity="0.1">
-                <h2>AWS IAM OIDC Provider</h2>
+                <section>
+                    <h2>AWS IAM OIDC Provider</h2>
+                    <img src="/assets/img/qr-aws-iam-oidc.png" alt="AWS IAM OIDC Provider Diagram">
+                </section>
+                <section>
+                    <h3>What is it</h3>
+                    <ul>
+                        <li class="fragment">Trusts tokens issued by the OIDC Provider</li>
+                        <li class="fragment">Maps token claims to IAM roles</li>
+                        <li class="fragment">Temporary AWS credentials are issued</li>
+                    </ul>
+                </section>
+                <section>
+                    <img src="/assets/img/code-cfn-oidc.png" alt="OIDC Provider CloudFormation">
+                </section>
             </section>
-
-            <!-- Add a slide on GitHub to AWS authentication -->
 
             <!-- OTHER WAY AROUND -->
             <section data-background-image="/assets/img/other-way-around.jpg" data-background-opacity="0.1">
-                <h2>The other way around</h2>
+                <section>
+                    <h2>The other way around</h2>
+                    <img src="/assets/img/qr-getwebidentitytoken.png" alt="AWS GetWebIdentityToken Documentation">
+                </section>
+                <section>
+                    <h3>What if...</h3>
+                    <ul>
+                        <li>Your application is running in AWS</li>
+                        <li>Your third party application is running outside of AWS</li>
+                        <li>You don't want to manage credentials</li>
+                    </ul>
+                </section>
+                <section>
+                    <img src="/assets/img/code-getwebidentitytoken.png" alt="AWS SDK OIDC Integration Diagram">
+                </section>
             </section>
-
-            <!-- Add a slide on GetWebIdentityToken -->
 
             <!-- DEMO -->
             <section data-background-image="/assets/img/laptop-and-juice.jpg" data-background-opacity="0.1">
@@ -73,6 +117,11 @@ curl -u 'username:password' https://api.example.com/data
             <!-- THE END -->
             <section data-background-image="/assets/img/sunset.jpg" data-background-opacity="0.1">
                 <h2>Thank you!</h2>
+                <img src="/assets/img/qr-github-repo.png" alt="GitHub QR Code">
+                <br>
+                <small><i class="fa-sharp fa-solid fa-envelope"></i><i> rob.kenis@axxes.com -
+                        cel.pynenborg@axxes.com</i>
+                </small>
             </section>
 
         </div>
